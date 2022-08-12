@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/create', [MessageController::class, 'create'])->name('create');
+Route::post('/read-msg/{id}', [MessageController::class, 'show']);
+Route::post('submit', [MessageController::class, 'store'])->name('submit');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [MessageController::class, 'index'])->name('home');
