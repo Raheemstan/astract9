@@ -64,14 +64,20 @@ class MessageController extends Controller
             'user_id' => auth()->user()->id,
         ]);
         $data->save();
-        return redirect()->route('home');
+
+        return redirect()->route('home')->with('success', 'Message Sent!!!');
+    }
+
+    public function back()
+    {
+        return redirect()->back();
     }
 
     public function show($id)
     {
         $data = Message::findorfail($id);
 
-        return  view('home');
+        return  view('home')->with('message', $data);
     }
 
     /**

@@ -4,8 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-                @include('layouts.error')
-            <a href="{{ route('create') }}" class="btn btn-success">New Message</a>
+            <a href="{{ route('users') }}" class="btn btn-secondary">Users</a>
             <br>&nbsp;
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>

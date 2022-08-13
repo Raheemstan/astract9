@@ -5,9 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Send New Message') }}</div>
-
+                <div class="card-header">{{ __('Send New Message') }}
+                </div>
+          
                 <div class="card-body">
+                <div class="float-left" style="align-self: left;">    
+                <a href="{{ route('home') }}" class="float-right">
+                                <button type="submit" class="btn btn-secondary">
+                                    {{ __('Back') }}
+                                </button>
+                    </a>
+                </div>
                     <form method="POST" action="{{ route('submit') }}">
                         @csrf
 
@@ -29,7 +37,7 @@
                             <label for="message" class="col-md-4 col-form-label text-md-end">{{ __('Message') }}</label>
 
                             <div class="col-md-6">
-                                <textarea name="message" id="message" cols="30" rows="10" required class="form-control @error('message') is-invalid @enderror"></textarea>
+                                <textarea name="message" id="message" cols="30" rows="5" required class="form-control @error('message') is-invalid @enderror"></textarea>
                                 
                                 @error('message')
                                     <span class="invalid-feedback" role="alert">
