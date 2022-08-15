@@ -23,19 +23,16 @@
                                 @if (count($users) != 0)
                         <table class="table">
                             <thead>
-                                <th>S/N</th>
-                                <th>Title</th>
+                                <th>@sortablelink('id')</th>
+                                <th>@sortablelink('name')</th>
                                 <th>Username</th>
                                 <th>Registered</th>
-                                <th>status</th>
+                                <th>@sortablelink('status')</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
                                     @foreach ($users  as $user)
                                     @if ($user->id === auth()->user()->id)
-                                        <tr colspan="6">
-                                            <td rowspan="5" align="center">No Registered Users</td>
-                                        </tr>
                                          @continue
                                     @endif
                                         <tr>

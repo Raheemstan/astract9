@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\MailSender;
 use App\Models\Message;
 use App\Models\User;
+use App\Notifications\NotifyActiveAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -40,8 +41,8 @@ class AdminController extends Controller
      */
     public function show()
     {
-        $users = User::all();
-        return view('admin.users')->with('users', $users);
+        $users = User::sortable()->paginate(10);
+        return view('admin.users', compact('users'));
     }
 
     /**
@@ -58,22 +59,12 @@ class AdminController extends Controller
         }elseif($action == 3){
             $stat = 0;
         }
-        $user = User::find($id);
+        $users = User::find($id);
+        $user = $users;
         $user->status = $stat;
         $user->save();
+        Mail::to($users->email)->queue(new MailSender($user->username));
         return redirect(route('users'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function send(Request $request)
-    {
-        $user = User::find($request->id);
-        Mail::to($user->email)->queue(new MailSender($request->message));
-        return response('message Successful');
-    }
 }

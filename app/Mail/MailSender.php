@@ -11,7 +11,7 @@ class MailSender extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    public $username;
     /**
      * Create a new message instance.
      *
@@ -19,7 +19,7 @@ class MailSender extends Mailable
      */
     public function __construct($data)
     {
-        $this->message = $data;
+        $this->username = $data;
     }
 
     /**
@@ -29,9 +29,16 @@ class MailSender extends Mailable
      */
     public function build()
     {
-        return $this->from('abiolar544@gmail.com')
-                    ->subject('Account Activated')
-                    ->with(['Hello,' + $this->message])
-                    ->view('mail');
+        return $this->subject('Account Status Update')
+                    ->markdown('vendor.notifications.email', [
+                        'actionUrl' => route('home'),
+                        'displayableActionUrl' => route('home'),
+                        'greeting' => 'Hello, '. $this->username,
+                        'level' => '3',
+                        'introLines' => ['Your Account status has been updated by the admin.',
+                        'You can now login to send messages to admin'],
+                        'actionText' => 'Login',
+                        'outroLines' => ['Thank you for using our application!'],
+                    ]);
     }
 }
