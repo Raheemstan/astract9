@@ -26,6 +26,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin//', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/admin/users/', [AdminController::class, 'show'])->name('users');
     Route::get('/admin/users/{id}{action}', [AdminController::class, 'update'])->name('update');
+    Route::post('/activate', [AdminController::class, 'send'])->name('activate');
 
 });
 
@@ -36,6 +37,17 @@ Route::group(['middleware' => 'user'], function ()
     Route::post('submit', [MessageController::class, 'store'])->name('submit');
  
 });
+Route::get('/unverified', function ()
+{
+    $level = auth()->user()->status;
+    if($level === 3){
+        return redirect(route('dashboard'));
+    }elseif($level === 1){
+        return redirect(route('home'));
+    }else{
+        return view('users.verify');
+}
+})->name('unverified');
 
 Auth::routes();
 

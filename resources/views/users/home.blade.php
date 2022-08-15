@@ -24,7 +24,6 @@
                                 <th>Title</th>
                                 <th>Message</th>
                                 <th>Date and Time</th>
-                                <th>status</th>
                             </thead>
                             <tbody>
                                 <?php
@@ -37,13 +36,6 @@
                                             <td>{{ $message -> title }}</td>
                                             <td>{{ $message -> message }}</td>
                                             <td>{{ $message -> created_at }}</td>
-                                            <td>
-                                                @if ($message -> status)
-                                                <span>Read</span>
-                                                @else
-                                                <span class="text text-warning">unread</span>
-                                                @endif
-                                            </td>
                                         </tr>
                                     @endforeach
                                     @else

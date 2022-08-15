@@ -36,8 +36,15 @@ class MessageController extends Controller
     public function index()
      {
         $user = auth()->user()->id;
-        $data = User::find($user);
-        return  view('users.home',) -> with('messages', $data->posts);
+        $level = auth()->user()->status;
+        if($level === 3){
+            return redirect(route('dashboard'));
+        }elseif($level === 0){
+            return redirect(route('unverified'));
+        }else{
+            $data = User::find($user);
+            return  view('users.home',) -> with('messages', $data->posts);
+        }
     }
 
     /**

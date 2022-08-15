@@ -19,7 +19,7 @@ class VerifiedUser
         if (auth()->user()->status==1) {
             return $next($request);
         }else{
-            return abort(401, 'Please contact Admin!');
+            return route('unverified');
         }
     }
 }

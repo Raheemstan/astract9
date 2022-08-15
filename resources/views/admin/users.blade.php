@@ -17,6 +17,10 @@
                     @endif
 
                     <div class="card-body">
+                                <?php
+                                $count = 1;
+                                ?>
+                                @if (count($users) != 0)
                         <table class="table">
                             <thead>
                                 <th>S/N</th>
@@ -27,12 +31,11 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                <?php
-                                $count = 1;
-                                ?>
-                                @if (count($users) != 0)
                                     @foreach ($users  as $user)
                                     @if ($user->id === auth()->user()->id)
+                                        <tr colspan="6">
+                                            <td rowspan="5" align="center">No Registered Users</td>
+                                        </tr>
                                          @continue
                                     @endif
                                         <tr>
@@ -56,14 +59,14 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    @else
-                                    <tr>
-                                        <td rowspan="3" align="center">No user Sent</td>
-                                    </tr>
-                                @endif
                             </tbody>
 
                         </table>
+                                    @else
+                                    <tr>
+                                        <td rowspan="3" align="center">No Registered Users</td>
+                                    </tr>
+                                @endif
                 </div>
                 </div>
             </div>
