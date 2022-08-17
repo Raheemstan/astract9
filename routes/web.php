@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin//', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/admin/users/', [AdminController::class, 'show'])->name('users');
@@ -49,7 +51,5 @@ Route::get('/unverified', function ()
         return view('users.verify');
 }
 })->name('unverified');
-
-Auth::routes();
 
 Route::get('/home', [MessageController::class, 'index'])->name('home');
