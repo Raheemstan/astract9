@@ -17,7 +17,7 @@ class VerifiedUser
     public function handle(Request $request, Closure $next)
     {
         try {
-            if (auth()->user()) {
+            if (auth()) {
                 if (auth()->user()->status === 1) {
                     return $next($request);
                 }else{
