@@ -17,11 +17,13 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         try {
-            if (auth()->user()->status==3) {
+        if (auth()->user()) {
+            if (auth()->user()->status === 3) {
                 return $next($request);
             }else{
                 return abort(403);
             }
+        }
         } catch (\Throwable $th) {
 
             return redirect()->route('home');     
