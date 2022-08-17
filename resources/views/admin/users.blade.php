@@ -37,8 +37,8 @@
                                     @endif
                                         <tr>
                                             <td>{{ $count++ }}</td>
-                                            <td>{{ $user -> username }}</td>
                                             <td>{{ $user -> name }}</td>
+                                            <td>{{ $user -> username }}</td>
                                             <td>{{ $user -> created_at }}</td>
                                             <td>
                                                 @if ($user -> status)
