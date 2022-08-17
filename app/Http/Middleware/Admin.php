@@ -16,14 +16,15 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()){
+        try {
             if (auth()->user()->status==3) {
                 return $next($request);
             }else{
                 return abort(403);
             }
-        }else{
-            return route('login');
+        } catch (\Throwable $th) {
+
+            return redirect()->route('home');     
         }
     }
 }

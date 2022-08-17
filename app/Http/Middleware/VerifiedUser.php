@@ -20,10 +20,10 @@ class VerifiedUser
             if (auth()->user()->status==1) {
                 return $next($request);
             }else{
-                return route('unverified');
+                return redirect()->route('unverified');
             }
         }else{
-            return route('login');
+            return redirect()->route('login');
         }
     }
 }
