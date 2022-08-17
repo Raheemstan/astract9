@@ -16,10 +16,14 @@ class VerifiedUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->status==1) {
-            return $next($request);
+        if (auth()->user()) {
+            if (auth()->user()->status==1) {
+                return $next($request);
+            }else{
+                return route('unverified');
+            }
         }else{
-            return route('unverified');
+            return route('login');
         }
     }
 }

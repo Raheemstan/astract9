@@ -16,10 +16,14 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->status==3) {
-            return $next($request);
+        if(auth()->user()){
+            if (auth()->user()->status==3) {
+                return $next($request);
+            }else{
+                return abort(403);
+            }
         }else{
-            return abort(403);
+            return route('login');
         }
     }
 }
